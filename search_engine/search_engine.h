@@ -37,3 +37,16 @@ public:
 
 	void putAnswers(vector<vector<pair<int, float>>> answers);
 };
+
+//Exceptions
+class FileOpenException : public exception
+{
+public:
+	const char* what() const noexcept override;
+};
+
+class FileEmptyException : public exception
+{
+public:
+	const char* what() const noexcept override;
+};

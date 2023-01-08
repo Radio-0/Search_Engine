@@ -1,7 +1,13 @@
 ﻿#include "search_engine.h"
+#include "gtest/gtest.h"
 #include <iostream>
 
 using namespace std;
+
+TEST(sample_test_case, sample_test)
+{
+	EXPECT_EQ(1, 1);
+}
 
 /*
 * The ConvertJSON class for working with JSON files
@@ -95,27 +101,25 @@ vector<string> ConverterJSON::GetRequests()
 //Put search result
 void ConverterJSON::putAnswers(vector<vector<pair<int, float>>> answers)
 {
-
+	ofstream fileAnswer("../../../../search_engine/answers.json");
+	nlohmann::json dictRequest;
+	nlohmann::json dict;
+	dict = { "answers", dictRequest };
+	fileAnswer << dict;
+	if (fileAnswer.bad() != true)
+		cout << "File answers.json is full\n";
 }
 
 //Exceptions
-class FileOpenException : public exception
+const char* FileOpenException::what() const noexcept
 {
-public:
-	const char* what() const noexcept override
-	{
-		return "Config file is missing!\n";
-	}
-};
+	return "Config file is missing!\n";
+}
 
-class FileEmptyException : public exception
+const char* FileEmptyException::what() const noexcept
 {
-public:
-	const char* what() const noexcept override
-	{
-		return "Config file is empty!\n";
-	}
-};
+	return "Config file is empty!\n";
+}
 
 //Main
 int main()
@@ -177,7 +181,10 @@ int main()
 		cout << "REQUEST" << i << ": " << fieldRequests[i] << endl;
 
 //Answers File
-	converter->putAnswers();
+	ofstream fileAnswer("../../../../search_engine/answers.json", ios::out);
+	vector<vector<pair<int, float>>> answers;
+	converter->putAnswers(answers);
+
 
 	return 0;
 }

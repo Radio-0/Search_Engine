@@ -20,11 +20,12 @@ enable_testing()
 add_executable (search_engine "main.cpp" "search_engine.h")
 
 add_subdirectory (nlohmann_json)
+add_subdirectory (googletest)
 
 # TODO: Добавьте тесты и целевые объекты, если это необходимо.
 
 target_link_libraries (search_engine PRIVATE nlohmann_json::nlohmann_json)
 
-target_link_libraries(search_engine PRIVATE gtest_main)
-include(GoogleTest)
+target_link_libraries (search_engine PRIVATE googletest)
+include (GoogleTest)
 gtest_discover_tests(search_engine)

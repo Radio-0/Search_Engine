@@ -1,3 +1,5 @@
 /.vs
 /out
 /search_engine/nlohmann_json
+*.pdf
+Example json files.txt

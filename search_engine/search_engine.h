@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "nlohmann_json/include/nlohmann/json.hpp"
+#include "gtest/gtest.h"
 
 #include <vector>
 #include <string>
@@ -62,7 +63,7 @@ class InvertedIndex
 public:
 	InvertedIndex() = default;
 	/**
-	* Обновить или заполнить базу документов, по которо йбудем совершать поиск
+	* Обновить или заполнить базу документов, по которой будем совершать поиск
 	* @param input_docs содержимое документов
 	*/
 	void UpdateDocumentBase(vector<string> input_docs);

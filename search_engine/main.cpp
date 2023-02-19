@@ -1,5 +1,4 @@
 ﻿#include "search_engine.h"
-#include "googletest/googletest/include/gtest/gtest.h"
 #include <iostream>
 
 using namespace std;
@@ -7,11 +6,11 @@ using namespace std;
 /**
 * TESTS
 */
-/*TEST(sample_test_case, sample_test)
+TEST(sample_test_case, sample_test)
 {
 	EXPECT_EQ(1, 1);
 }
-void TestInvertedIndexFunctionality(
+/*void TestInvertedIndexFunctionality(
 	const vector<string>& docs,
 	const vector<string>& requests,
 	const vector<vector<Entry>>& expected)
@@ -170,7 +169,7 @@ vector<string>ConverterJSON::GetTextDocuments(vector<string> field)
 							break;
 						}
 						sSpace = fSpace;
-						cout << "Letters: " << numberLetter - 1 << endl;
+						//cout << "Letters: " << numberLetter - 1 << endl;
 					}
 					if (numberWord > 1000 || numberLetter - 1 > 100)
 					{
@@ -236,10 +235,24 @@ const char* FileEmptyException::what() const noexcept
 	return "Config file is empty!\n";
 }
 
+void InvertedIndex::UpdateDocumentBase(vector<string> input_docs)
+{
+	
+	docs = input_docs;
+	size_t docSize = docs.size();
+	struct Entry entry[5];	//Разобраться с размером, должен быть docs.size()
+	for (int i = 0; i < docs.size(); i++)
+	{
+		entry[i].doc_id = i;
+		cout << docs[i] << endl;
+	}
+}
+
 //Main
 int main()
 {
 	ConverterJSON* converter = new ConverterJSON();
+	InvertedIndex* inverted = new InvertedIndex();
 
 	ifstream fileConfig("../../../../search_engine/config.json");
 	nlohmann::json dictConfig;
